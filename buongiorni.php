@@ -1,7 +1,7 @@
 <?php
 
 /*
-Plugin Name: Andr�tuttobene
+Plugin Name: Andràtuttobene
 Plugin URI: https://github.com/ArcaneDiver/BHUB-andratuttobene-buongiorni
 Description: Integrate Buongiorno post-type
 Version: 1.0
@@ -104,7 +104,7 @@ class Buongiorni
 		$id = wp_insert_post(array(
 			'post_title' => $title,
 			'post_type' => $this->post_type_name,
-			'post_status' => 'publish'
+			'post_status' => 'draft'
 
 		));
 
@@ -116,7 +116,7 @@ class Buongiorni
 		$id = wp_insert_post(array(
 			'post_title' => $title,
 			'post_type' => $this->post_type_name,
-			'post_status' => 'publish'
+			'post_status' => 'draft'
 
 		));
 
@@ -130,7 +130,7 @@ class Buongiorni
 		$id = wp_insert_post(array(
 			'post_title' => $title,
 			'post_type' => $this->post_type_name,
-			'post_status' => 'publish'
+			'post_status' => 'draft'
 
 		));
 
@@ -143,7 +143,7 @@ class Buongiorni
 		$id = wp_insert_post(array(
 			'post_title' => $title,
 			'post_type' => $this->post_type_name,
-			'post_status' => 'publish'
+			'post_status' => 'draft'
 
 		));
 
@@ -158,8 +158,15 @@ class Buongiorni
 	{
 		global $buongiorni;
 
-		$data = Caldera_Forms::get_submission_data($form);
 
+		if(!is_user_logged_in()) {
+			return array(
+				"note" => "Please log-in",
+				"type" => "error"
+			);
+		}
+
+		$data = Caldera_Forms::get_submission_data($form);
 
 
 		$buongiorni->create_post_text($data["fld_8340036"], $data["fld_6647393"]);
@@ -174,9 +181,15 @@ class Buongiorni
 	{
 		global $buongiorni;
 
+		if(!is_user_logged_in()) {
+			return array(
+				"note" => "Please log-in",
+				"type" => "error"
+			);
+		}
+
+
 		$data = Caldera_Forms::get_submission_data($form);
-
-
 
 		$buongiorni->create_post_audio($data["fld_6794564"], $data["fld_1227424"][0], $data["fld_4543576"]);
 
@@ -191,10 +204,16 @@ class Buongiorni
 	{
 		global $buongiorni;
 
+		if(!is_user_logged_in()) {
+			return array(
+				"note" => "Please log-in",
+				"type" => "error"
+			);
+		}
+
+
+
 		$data = Caldera_Forms::get_submission_data($form);
-
-
-
 		$buongiorni->create_post_video($data["fld_6061100"], $data["fld_5741964"][0], $data["fld_2966742"]);
 
 		return array(
@@ -207,10 +226,15 @@ class Buongiorni
 	{
 		global $buongiorni;
 
+		if(!is_user_logged_in()) {
+			return array(
+				"note" => "Please log-in",
+				"type" => "error"
+			);
+		}
+
+
 		$data = Caldera_Forms::get_submission_data($form);
-
-		
-
 		$buongiorni->create_post_link($data["fld_5810910"], $data["fld_6221578"], $data["fld_3911754"]);
 
 		return array(
